@@ -56,7 +56,10 @@ l = 0;
 
 while ~isempty(email_contents)
 
-    % Tokenize and also get rid of any punctuation
+    % Tokenize and also get rid of any punctuation - 
+    % hejtmy - tokenisation returns remainder after getting the token - so we are 
+    % cutting off the email contents piecce by piece.
+    % char(100 and 13 are probably spaces
     [str, email_contents] = ...
        strtok(email_contents, ...
               [' @$/#.-:&*+=[]?!(){},''">_<;%' char(10) char(13)]);
@@ -97,17 +100,12 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
-
+    iVocab = find(strcmp(str, vocabList));
+    if (length(iVocab) == 1) 
+      word_indices = [word_indices; iVocab];
+    end
+    
     % =============================================================
-
 
     % Print to screen, ensuring that the output lines are not too long
     if (l + length(str) + 1) > 78
@@ -116,7 +114,6 @@ while ~isempty(email_contents)
     end
     fprintf('%s ', str);
     l = l + length(str) + 1;
-
 end
 
 % Print footer

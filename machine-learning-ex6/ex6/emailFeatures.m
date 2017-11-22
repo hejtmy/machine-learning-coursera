@@ -45,16 +45,17 @@ x = zeros(n, 1);
 %              vector should look like:
 %
 %              x = [ 0 0 0 0 1 0 0 0 ... 0 0 0 0 1 ... 0 0 0 1 0 ..];
-%
-%
-
-
-
-
-
-
-
-
+  
+  % this actually works, because matrices and vectors are compared by rows
+  % we create matix 
+  % 1 1 1 
+  % 2 2 2
+  % . . .
+  % n n n
+  % and compare to it vector 3, 5, 1 = it should return 1 only at those rows
+  ComparingMatrix = repmat((1:n)', 1, length(word_indices));
+  allFeatures = ComparingMatrix == word_indices';
+  x = any(allFeatures')'; % need to do this by row and then return vector with n rows
 % =========================================================================
     
 

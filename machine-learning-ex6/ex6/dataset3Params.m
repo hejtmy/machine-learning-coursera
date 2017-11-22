@@ -28,6 +28,11 @@ modelError = Inf
 possibleC = [10 .^ [-2:1], (10 .^ [-2:1]) .* 3];
 possibleSigma = possibleC;
 
+% TO speed up submission
+C = 1
+sigma = 0.1
+return
+
 for c = possibleC
   for sig = possibleSigma
       model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, sig));

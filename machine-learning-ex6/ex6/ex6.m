@@ -147,5 +147,3 @@ visualizeBoundary(X, y, model);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
-svmPredict
-mean(double(predictions ~= yval))
