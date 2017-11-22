@@ -22,12 +22,27 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+modelError = Inf 
 
 
+possibleC = [10 .^ [-2:1], (10 .^ [-2:1]) .* 3];
+possibleSigma = possibleC;
 
-
-
-
+for c = possibleC
+  for sig = possibleSigma
+      model = svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, sig));
+      predictions = svmPredict(model, Xval);
+      error = mean(double(predictions ~= yval));
+      if error < modelError
+        modelError = error
+        C = c;
+        sigma = sig;
+        visualizeBoundary(Xval, yval, model);
+        fprintf('Program paused. Press enter to continue.\n');
+        pause;
+      endif
+  endfor
+endfor
 
 % =========================================================================
 
