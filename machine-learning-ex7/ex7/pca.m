@@ -20,8 +20,9 @@ S = zeros(n);
 %       number of examples).
 %
 
+covMatrix = (X' * X) ./ m;
 
-
+[U, S, V] = svd(covMatrix);
 
 
 
