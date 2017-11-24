@@ -28,6 +28,9 @@ centroids = zeros(K, n);
 
 for iC = 1:K
   values = X(idx == iC, :);
+  if size(values, 1) < 1
+    continue
+  endif
   centroids(iC, :) = mean(values, 1);
 endfor
 
