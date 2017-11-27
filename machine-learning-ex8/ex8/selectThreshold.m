@@ -25,7 +25,7 @@ for epsilon = min(pval):stepsize:max(pval)
  
     anomaly = pval < epsilon;
     truePositives = sum(yval & anomaly);
-    falsePositives = sum(anomaly) - truePositives;
+    falsePositives = sum(~yval & anomaly);
     falseNegatives = sum(yval & ~anomaly);
     
     precision = truePositives / (truePositives + falsePositives);
